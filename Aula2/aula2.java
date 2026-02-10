@@ -1,4 +1,4 @@
-package com.mycompany.mavenproject1.Aulas;
+package com.mycompany.mavenproject1.Aulas.Aula2;
 
 public class aula2 {
     public static void main(String a[]){

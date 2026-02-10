@@ -1,4 +1,4 @@
-package com.mycompany.mavenproject1.Aulas;
+package com.mycompany.mavenproject1.Aulas.Aula2;
 import java.math.BigInteger;
 import java.util.Scanner;
 public class Ex11 {
