@@ -1,6 +1,6 @@
-package com.mycompany.mavenproject1.Aula2;
+package com.mycompany.mavenproject1.Aulas;
 import java.util.Scanner;
-import java.lang.Math.*;
+
 public class Ex09 {
     public static void main(String a[]){
         Scanner leitor = new Scanner(System.in);

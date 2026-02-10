@@ -1,6 +1,5 @@
-package com.mycompany.mavenproject1.Aula2;
+package com.mycompany.mavenproject1.Aulas;
 import java.math.BigInteger;
-import java.lang.Math;
 import java.util.Scanner;
 public class Ex11 {
     public static void main(String a[]){

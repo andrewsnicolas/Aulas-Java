@@ -1,5 +1,4 @@
-package com.mycompany.mavenproject1.Aula2;
-import java.lang.Math.*;
+package com.mycompany.mavenproject1.Aulas;
 import java.util.Scanner;
 
 public class Ex06 {

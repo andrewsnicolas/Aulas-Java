@@ -1,4 +1,4 @@
-package com.mycompany.mavenproject1.Aula2;
+package com.mycompany.mavenproject1.Aulas;
 import java.util.Scanner;
 
 public class Ex01 {
