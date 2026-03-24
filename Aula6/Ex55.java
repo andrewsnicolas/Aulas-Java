@@ -60,10 +60,10 @@ public class Ex55 {
         }
         return matriz;
     }
-    static int verificar_valores_nulos(int objetoaVerificar, String oque, int numeroMatriz){
+    static int verificar_valores_nulos(int objetoaVerificar, String conteudo_digitado, int numeroMatriz){
         Scanner reader = new Scanner(System.in);
         do{
-            System.out.printf("\nDigite o número de %s da %d° matriz\n", oque, numeroMatriz);
+            System.out.printf("\nDigite o número de %s da %d° matriz\n", conteudo_digitado, numeroMatriz);
             objetoaVerificar = reader.nextInt(); 
         } while(objetoaVerificar==0);
         return objetoaVerificar;
