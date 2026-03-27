@@ -10,20 +10,13 @@ public class Metodos {
         } while(entrada<=0);
         return entrada;
     }
-    static float calcular_media_alunos(int[] notas){
+    static float calcular_media_prova(float[][] notas, int provaIndex){
         float media = 0F;
-        for(float c: notas) media+=c;
-        media = (media)/(notas.length);
-        return media;
-    }
-    static float calcular_media_prova(int[][] notas, int provaIndex){
-        float media = 0F;
-        provaIndex--;
         for(int c = 0; c < notas.length; c++) media += notas[c][provaIndex];
         media = media/notas.length;
         return media;
     }
-    static void melhor_pior_media_aluno(int[][] notas){
+    static void melhor_pior_media_aluno(float[][] notas){
         int piorAluno=0, melhorAluno=0;
         float piorMedia=10000F, melhorMedia=0F, media;
         for(int c = 0; c<notas.length; c++){
@@ -40,13 +33,13 @@ public class Metodos {
         System.out.printf("\nO %d aluno é o melhor e obteve a média: %.2f", melhorAluno, melhorMedia);
         System.out.printf("\nO %d aluno é o pior e obteve a média: %.2f", piorAluno, piorMedia);
     }
-    static float calcular_media_aluno(int notas[]){
+    static float calcular_media_aluno(float notas[]){
         float media = 0F;
         for(float c : notas) media += c;
         media/=notas.length;
         return media;
     }
-    static void ordenar_alunos_media(int[][] notas) {
+    static void ordenar_alunos_media(float[][] notas) {
         float[] media = new float[notas.length];
         int ac = 0;
         int[] alunos = new int[notas.length];
@@ -69,10 +62,10 @@ public class Metodos {
                 }
             }
         }
-        for (int i = 0; i < notas.length; i++)
-            System.out.printf("\n%d° lugar: Aluno %d (Nota: %.2f)", (i + 1), alunos[i], media[i]);
+        for (int i = notas.length-1; i >= 0; i--)
+            System.out.printf("\n%d° lugar: Aluno %d (Nota: %.2f)", (notas.length-i + 1), alunos[i], media[i]);
     }
-    static int contagem_aprovados(int[][] notas){
+    static int contagem_aprovados(float[][] notas){
         int aprovados = 0;
         float media = 0F;
         for(int i = 0; i<notas.length; i++){
@@ -81,20 +74,20 @@ public class Metodos {
         }
         return aprovados;
     }
-    static float calcular_media_geral(int[][] notas){
+    static float calcular_media_geral(float[][] notas){
         float media_geral = 0F;
         for(int i = 0; i<notas.length; i++) media_geral += calcular_media_aluno(notas[i]);
         media_geral /= notas.length;
         return media_geral;
     }
-    static void desempenho_geral(int[][] notas){
+    static void desempenho_geral(float[][] notas){
         float media_geral = calcular_media_geral(notas);
         float nota_prova_mais_dificil = 9999F;
         float nota_prova_mais_facil = 0F;
         int index_prova_mais_dificil = 0;
         int index_prova_mais_facil = 0;
         float ac;
-        for(int k=0; k<notas[k].length; k++){
+        for(int k=0; k<notas[0].length; k++){
             ac = 0;
             for(int l = 0; l<notas.length; l++){
                 ac+=notas[l][k];
@@ -112,7 +105,7 @@ public class Metodos {
         System.out.printf("\nA %d prova foi a mais fácil, tendo a média geral: %.2f", (index_prova_mais_facil+1), nota_prova_mais_facil);
         System.out.printf("\nMédia geral da turma: %.2f", media_geral);
     }
-    static void desvio_desempenho(int[][] notas){
+    static void desvio_desempenho(float[][] notas){
         float media_geral = calcular_media_geral(notas);
         float[] desvio_nota = new float[notas.length];
         float media = 0F;
@@ -133,7 +126,7 @@ public class Metodos {
             System.out.printf("\nO aluno %d, teve um desvio de %.2f %s", (i+1), modulo_desvio_nota, mensagem );
         }
     }
-    static void detectar_padrao_estranho(int[][] notas, float desvio_consistente){
+    static void detectar_padrao_estranho(float[][] notas, float desvio_consistente){
         int quantidade_alunos_padroes_estranhos = 0;
         int[] index_alunos_padroes_estranhos = new int [notas.length];
         float media = 0;
@@ -160,7 +153,7 @@ public class Metodos {
             }
         }
         for(int i = 0; i<quantidade_alunos_padroes_estranhos; i++){
-            System.out.println("\nO aluno de index %d teve um padrão estranho");
+            System.out.printf("\nO aluno de index %d teve um padrão estranho\n", i);
             for(int c = 0; c<notas[i].length; c++){
                 System.out.print(notas[index_alunos_padroes_estranhos[i]][c]+ " ");
             }
