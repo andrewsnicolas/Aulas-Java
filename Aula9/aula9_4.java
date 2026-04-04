@@ -9,6 +9,7 @@ class Humano{
     public String getCPF(){
         return cpf;
     }
+
     public void setCPF(String newCpf){
         cpf = newCpf;
     }
