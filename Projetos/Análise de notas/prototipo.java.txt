@@ -1,0 +1,54 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+class Main {
+    public static void main(String[] args) {
+        System.out.println("\033[40;5;36***************Bem vindo ao hotel batata!\033[0m******************");
+        Reserva obj = new Reserva();
+        obj.setQuantDias(Integer.toString(-1));
+        /*
+        do{
+            System.out.println("O que você")
+        }while();
+        */
+    }
+    public quarto_existe(int... quartos){
+        
+    }
+}
+class MenorZero extends Exception{
+    public MenorZero(String message){
+        super(message);
+    }
+}
+class Quarto{
+    boolean ocupado = false;
+    int nQuarto;
+    float precoDiaria;
+    public Quarto(){
+    }
+    public void consultar_info_quartos(int... quartos){
+        for(int cont = 0; )
+    }
+}
+
+class Reserva{
+    String nomeCliente;
+    int nQuartoReserv;
+    private int quantDias;
+    public void setQuantDias(String dias){
+        int entrada;
+        try{
+            entrada = Integer.parseInt(dias);
+            if(entrada <= 0) throw new MenorZero("Número digitado "+ (entrada==0? "igual":"inferior")+ " a zero");
+            
+        } catch (NumberFormatException e){
+            System.out.println("Valor da reserva inválido (você digitou um número)");
+        }
+        catch (MenorZero e){
+            //System.out.println(e);
+            System.out.println("Número digitado "+ (entrada==0? "igual":"inferior")+ " a zero");
+        }
+        
+    }
+}
