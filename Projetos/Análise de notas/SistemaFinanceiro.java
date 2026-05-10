@@ -1,5 +1,15 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+class ValorForaIntervalo extends Exception{
+    public ValorForaIntervalo(String msg){
+        super(msg);
+    }
+}
+class ValorNegativo extends Exception{
+    public ValorNegativo(String msg){
+        super(msg);
+    }
+}
 
 class Transacao{
     public enum Tipo{
@@ -20,15 +30,15 @@ public class SistemaFinanceiro{
         int retorno = 0;
         try{
             retorno = Integer.parseInt(ent);
+            if(retorno<1 || retorno>5) throw new ValorForaIntervalo("Valor fora do intervalo pré-definido.");
             //Adicionar uma exceção personalizada que verifica se está dentro do intervalo
         } catch(Exception e){
             System.out.println("Digite um número válido!");
+            System.out.println("Digite outro valor");
             ent = reader.next();
             validar_entrada(ent);
         }
-        finally{
             return retorno;
-        }
     }
     public static void main(String args[]){
 
@@ -44,6 +54,7 @@ public class SistemaFinanceiro{
                                "5 - Salvar e sair");
             entrada = reader.next();
             respUsuar = validar_entrada(entrada);
+            System.out.println(respUsuar);
             switch(respUsuar){
                 case 1:
                     break;

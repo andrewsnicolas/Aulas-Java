@@ -3,7 +3,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Random;
-public class Ex050 {
+public class CriadorDados {
     public static void main(String args[]){
         Faker faker = new Faker();
         float[] notas = new float[4];
@@ -14,7 +14,9 @@ public class Ex050 {
         float notaAleatoria;
         int c;
         String conteudo;
-        try (FileWriter escritor = new FileWriter("notasAlunos.txt")){
+        String caminhoAtual = System.getProperty("user.dir") + "\\Aulas\\Aula10\\notasAlunos.txt";
+        System.out.println(caminhoAtual);
+        try (FileWriter escritor = new FileWriter(caminhoAtual)){
             ;
             for(int i = 0; i<=50; i++){
                 c=0;
@@ -27,7 +29,7 @@ public class Ex050 {
                 escritor.write(conteudo+"\n");
             }
             System.out.println(System.getProperty("user.dir"));
-            System.out.println("Deu tudo certo");
+            System.out.println("Arquivo criado com sucesso");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
