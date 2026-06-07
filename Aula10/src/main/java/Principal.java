@@ -9,7 +9,7 @@ public class Principal {
         do{
         do{
             if(errou) System.out.println("\033[1;31mVALOR DIGITADO INVÁLIDO\nPOR FAVOR, DIGITE OUTRO NÚMERO\033[0m");
-            System.out.println("O que você quer fazer?\n" +
+            System.out.println("\nO que você quer fazer?\n" +
                     "1)Criar um aluno\n" +
                     "2)Verificar se um aluno existe\n" +
                     "3)Ver a nota de um aluno\n" +
@@ -19,8 +19,9 @@ public class Principal {
                     "7)Fazer backup\n" +
                     "8)Sair");
             escolha = reader.nextInt();
-            errou = true;
-        } while(escolha < 1 || escolha>7);
+            if(escolha<1 || escolha>7) errou = true;
+            else errou = false;
+        } while(escolha < 1 || escolha>8);
         if(escolha==8) break;
         switch(escolha) {
             case 1:
