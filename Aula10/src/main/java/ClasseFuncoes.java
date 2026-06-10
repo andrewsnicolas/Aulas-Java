@@ -38,7 +38,7 @@ public class ClasseFuncoes {
             System.out.printf("Você tem certeza que deseja adicionar esse (%s) nome?" +
                     "\nDigite 's' para sim\nDigite 'n' para não\n", nome);
             entrada = reader.next().charAt(0);
-            errou = true;
+            errou = true; //É usada para dizer se o usuário digitou algo errado
 
             //Se ele não quiser, volta toda a função para ele digitar o nome
             if(Character.toLowerCase(entrada) == 'n') criarAluno();
@@ -70,8 +70,8 @@ public class ClasseFuncoes {
         }
     }
 
-    //Opção 2: Verificar se um aluno
-    public static void procurarAluno() throws FileNotFoundException {
+    //Opção 3: Verificar notas de alunos
+    public static void verificarNota() throws FileNotFoundException {
         //Opções de alunos que podem aparecer após o usuário digitar os nomes
         Map<Integer, String> alunosPossiveis = new HashMap<Integer, String>();
 
@@ -83,50 +83,79 @@ public class ClasseFuncoes {
 
         //Variável que recebe S ou N - verifica se o usuário quer continuar procurando o aluno
         char continuarProcurando;
-
+        /*
+        nome - recebe o nome digitado pelo usuário
+        linha - recebe o valor de cada linha do arquivo
+        */
         String linha = "", nome;
+
+        //Aluno - armazena os dados de cada aluno
         String[] aluno = new String[5];
-        int linhaAtual = 0, tamanho, escolha = -1;
-        reader.nextLine();
-        while(escolha < 0){
-            alunosPossiveis.clear();
-            continuarProcurando = 'a';
+
+        /*
+        contLinhas - contador para a linha que o usuário está
+        quantAlunPossiv - alunos que aparecem no filtro após digitar o nome
+        opcaoEscol - Qual é o nome que ele quer as notas
+        */
+        int contLinhas = 0, quantAlunPossiv, opcaoEscol = -1;
+
+        reader.nextLine(); //limpa o reader
+        while(opcaoEscol < 0){
+            alunosPossiveis.clear(); //limpa o vetor
+            continuarProcurando = 'a'; //garante que o loop seja feito
             opcaoInvalidaSN = false;
             if(opcaoInvalida) {
                 while(true){
                     if(opcaoInvalidaSN) System.out.println("\033[1;31mLETRA INSERIDA INVÁLIDA\n" +
                                     "DIGITE 'S' PARA SIM E 'N' PARA NÃO\033[0m");
+
                     System.out.println("O nome que você digitou não foi encontrado\n" +
                             "Deseja continuar procurando? [S/N]");
                     continuarProcurando = reader.next().charAt(0);
+
+
                     if(Character.toLowerCase(continuarProcurando) == 'n' ||
                             Character.toLowerCase(continuarProcurando) == 's') break;
-                    opcaoInvalidaSN = true;
+                    opcaoInvalidaSN = true; //Se o loop acontecer, ele mostrará que a opção digitada foi inválida
                 }
             }
             if(Character.toLowerCase(continuarProcurando) == 's') {
-                reader.nextLine();
+                reader.nextLine(); //limpa o readline
                 opcaoInvalida = false;
             }
             if(Character.toLowerCase(continuarProcurando) == 'n') {
                 System.out.println("\nVocê decidiu encerrar a busca");
                 break;
             }
+
             System.out.println("Digite o nome do aluno que está procurando: ");
             nome = reader.nextLine();
+
             Scanner readerArq = new Scanner(arquivo);
-            linhaAtual = 0;
+            contLinhas = 0;
+
+            //Lê a linha e confirma se o nome é igual ou possui caracteres semelhantes ao que o usuário digitou
             while(readerArq.hasNext()){
                 linha = readerArq.nextLine();
                 if(linha.contains(nome)) {
                     aluno = linha.split(";");
-                    alunosPossiveis.put(linhaAtual, aluno[0]);
+
+                    /*
+                    Crie uma lista de nomes que podem ser possiveis por possuir a mesma cadeia de texto
+                    que o usuário digitou
+                    */
+                    alunosPossiveis.put(contLinhas, aluno[0]);
                 }
-                linhaAtual++;
+                contLinhas++;
             }
-            tamanho = alunosPossiveis.size();
-            if(tamanho==0) opcaoInvalida = true;
-            else if(tamanho<=8){
+
+            quantAlunPossiv = alunosPossiveis.size();
+
+            //Se não houver nenhum usuario semelhante, o nome digitado é inválido
+            if(quantAlunPossiv==0) opcaoInvalida = true;
+
+
+            else if(quantAlunPossiv<=8){
                 System.out.println("Quais desses alunos você quer saber as informações? (Escolha pelo índice)");
                 for(Integer i : alunosPossiveis.keySet()){
                     System.out.printf("\n Índice - %d   Nome: %s", i, alunosPossiveis.get(i));
@@ -135,17 +164,26 @@ public class ClasseFuncoes {
                 do{
                     if(opcaoInvalidaIndx)
                         System.out.println("\nDIGITE UM VALOR DENTRO DO INTERVALO");
+
                     System.out.println("\nDigite o índice que você deseja: ");
-                    escolha = reader.nextInt();
-                    opcaoInvalidaIndx = true;
-                } while(alunosPossiveis.get(escolha) == null);
+                    opcaoEscol = reader.nextInt();
+
+                    opcaoInvalidaIndx = true; //Caso o usuário digite valor inválido
+                } while(alunosPossiveis.get(opcaoEscol) == null);
+
+                //Caso o usuário definitivamente escolha qual aluno ele quer
                 aluno = linha.split(";");
             }
+
+            //A fim de que o usuário não pegue muitas informações ou o nome fique muito longe
             else
                 System.out.println("NÃO FOI POSSÍVEL LOCALIZAR (HÁ MUITOS NOMES)\nREESCREVA E DÊ MAIS DETALHE DOS NOMES");
+
+            //Termina a função de ler o arquivo (ou seja, volta para a primeira linha quando for reaberto)
             readerArq.close();
+
         }
-        if(escolha>=0){
+        if(opcaoEscol >=0){
 
             System.out.printf(
                     "O nome completo do aluno é: %s\n" +
